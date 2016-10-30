@@ -10,9 +10,7 @@ namespace MonogameProject
     public class Game1 : Game
     {
         GraphicsDeviceManager graphics;
-
-        VertexPosition[] stationVerts;
-
+        MainSolid stacja;
         BasicEffect effect;
 
         Camera camera;
@@ -29,26 +27,13 @@ namespace MonogameProject
         /// </summary>
         protected override void Initialize()
         {
-            stationVerts = InitializeStation();
-
             effect = new BasicEffect(graphics.GraphicsDevice);
 
             camera = new Camera(graphics.GraphicsDevice);
 
+            stacja = new MainSolid(effect, camera, graphics);
+
             base.Initialize();
-        }
-
-        public VertexPosition[] InitializeStation()
-        {
-            VertexPosition[] sVerts = new VertexPosition[6];
-            sVerts[0].Position = new Vector3(-20, -20, 0);
-            sVerts[1].Position = new Vector3(-20, 20, 0);
-            sVerts[2].Position = new Vector3(20, -20, 0);
-            sVerts[3].Position = sVerts[1].Position;
-            sVerts[4].Position = new Vector3(20, 20, 0);
-            sVerts[5].Position = sVerts[2].Position;
-
-            return sVerts;
         }
        
         /// <summary>
@@ -85,25 +70,9 @@ namespace MonogameProject
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            DrawStation();
+            stacja.DrawStation();
 
             base.Draw(gameTime);
-        }
-
-        void DrawStation()
-        {
-            effect.View = camera.ViewMatrix;
-            effect.Projection = camera.ProjectionMatrix;
-
-            effect.TextureEnabled = false;
-
-            foreach (var pass in effect.CurrentTechnique.Passes)
-            {
-                pass.Apply();
-
-                graphics.GraphicsDevice.DrawUserPrimitives(
-                    PrimitiveType.TriangleList, stationVerts, 0, 2); // The number of triangles to draw
-            }
         }
     }
 }

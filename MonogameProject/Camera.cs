@@ -9,20 +9,21 @@ using Microsoft.Xna.Framework.Input;
 
 namespace MonogameProject
 {
-    class Camera
+    public class Camera
     {
         // We need this to calculate the aspectRatio
         // in the ProjectionMatrix property.
         GraphicsDevice graphicsDevice;
 
-        Vector3 position = new Vector3(0, 50, 10);
-
+        Vector3 position = new Vector3(0, -50, 10);
+        
         float angleZ, angleX;
-
+        
         public Matrix ViewMatrix
         {
             get
-            {   var lookAtVector = new Vector3(0, -1, -0.1f);
+            {   
+                var lookAtVector = new Vector3(0, 1, -0.1f);
 
                 var rotationMatrix = Matrix.CreateRotationZ(angleZ);
                 var rotationMatrix2 = Matrix.CreateRotationX(angleX);
@@ -61,19 +62,27 @@ namespace MonogameProject
             ////---------------------LEWO PRAWO GORA DOL
             if (Keyboard.GetState().IsKeyDown(Keys.Left))
             {
-                position.X += 0.5f;
+                position.X -= 1.0f;
+                position.Y -= (float)Math.Sin((double)angleZ);
+                position.Z += (float)Math.Sin((double)angleX);
             }
             if (Keyboard.GetState().IsKeyDown(Keys.Right))
             {
-                position.X -= 0.5f;
+                position.X += 1.0f;
+                position.Y += (float)Math.Sin((double)angleZ);
+                position.Z -= (float)Math.Sin((double)angleX);
             }
             if (Keyboard.GetState().IsKeyDown(Keys.Up))
             {
-                position.Y -= 0.5f;
+                position.Y += 1.0f;
+                position.X -= (float)Math.Sin((double)angleZ);
+                position.Z += (float)Math.Sin((double)angleX);
             }
             if (Keyboard.GetState().IsKeyDown(Keys.Down))
             {
-                position.Y += 0.5f;
+                position.Y -= 1.0f;
+                position.X += (float)Math.Sin((double)angleZ);
+                position.Z -= (float)Math.Sin((double)angleX);
             }
             ////----------------------PRZOD TYL
             if (Keyboard.GetState().IsKeyDown(Keys.OemPlus))
@@ -88,11 +97,11 @@ namespace MonogameProject
             ////--------------------OBROTY LEWO PRAWO GORA DOL
             if (Keyboard.GetState().IsKeyDown(Keys.W))
             {
-                angleX -= 0.02f;
-            }
+                angleX += 0.02f;
+                            }
             if (Keyboard.GetState().IsKeyDown(Keys.S))
             {
-                angleX += 0.02f;
+                angleX -= 0.02f;
             }
             if (Keyboard.GetState().IsKeyDown(Keys.A))
             {

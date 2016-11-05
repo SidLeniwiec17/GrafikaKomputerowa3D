@@ -26,13 +26,13 @@ namespace MonogameProject
 
         public VertexPosition[] InitializeStation()
         {
-            VertexPosition[] sVerts = new VertexPosition[12];
-            sVerts[0].Position = new Vector3(-20, -20, 0);
-            sVerts[1].Position = new Vector3(-20, 20, 0);
-            sVerts[2].Position = new Vector3(20, -20, 0);
+            VertexPosition[] sVerts = new VertexPosition[18];
+            sVerts[0].Position = new Vector3(-20, -20, -20);
+            sVerts[1].Position = new Vector3(-20, 20, -20);
+            sVerts[2].Position = new Vector3(20, -20, -20);
 
             sVerts[3].Position = sVerts[1].Position;
-            sVerts[4].Position = new Vector3(20, 20, 0);
+            sVerts[4].Position = new Vector3(20, 20, -20);
             sVerts[5].Position = sVerts[2].Position;
 
             sVerts[6].Position = sVerts[1].Position;
@@ -43,15 +43,22 @@ namespace MonogameProject
             sVerts[10].Position = new Vector3(20, 20, 20);
             sVerts[11].Position = sVerts[8].Position;
 
+            sVerts[12].Position = sVerts[4].Position;
+            sVerts[13].Position = sVerts[10].Position;
+            sVerts[14].Position = sVerts[2].Position;
+
+            sVerts[15].Position = sVerts[10].Position;
+            sVerts[16].Position = new Vector3(20, -20, 20);
+            sVerts[17].Position = sVerts[2].Position;
+
             return sVerts;
         }
 
         public void DrawStation()
         {
-            effect.World = Matrix.CreateRotationZ(-(float)Math.PI / 2);
             effect.View = camera.ViewMatrix;
             effect.Projection = camera.ProjectionMatrix;
-            //effect.World = Matrix.Identity * Matrix.CreateRotationZ((float)Math.PI / 2);
+
             effect.TextureEnabled = false;
 
             foreach (var pass in effect.CurrentTechnique.Passes)
@@ -59,7 +66,7 @@ namespace MonogameProject
                 pass.Apply();
 
                 graphics.GraphicsDevice.DrawUserPrimitives(
-                    PrimitiveType.TriangleList, stationVerts, 0, 4); // The number of triangles to draw
+                    PrimitiveType.TriangleList, stationVerts, 0, 6); // The number of triangles to draw
             }
         }
     }

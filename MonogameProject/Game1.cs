@@ -11,14 +11,16 @@ namespace MonogameProject
     {
         GraphicsDeviceManager graphics;
         MainSolid stacja;
+        Platform peron;
         BasicEffect effect;
+        Texture2D podlogaTexture, scianyTexture, betonTexture;
 
         Camera camera;
 
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
-            graphics.IsFullScreen = true;
+            //graphics.IsFullScreen = true;
             Content.RootDirectory = "Content";
         }
 
@@ -31,7 +33,8 @@ namespace MonogameProject
 
             camera = new Camera(graphics.GraphicsDevice);
 
-            stacja = new MainSolid(effect, camera, graphics);
+            stacja = new MainSolid(effect, camera, graphics, 40, 100);
+            peron = new Platform(effect, camera, graphics, 40, 100);
 
             base.Initialize();
         }
@@ -42,7 +45,10 @@ namespace MonogameProject
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             //spriteBatch = new SpriteBatch(GraphicsDevice);
-
+            scianyTexture = this.Content.Load<Texture2D>("scianaTekstura");
+            podlogaTexture = this.Content.Load<Texture2D>("podłogaTekstura");
+            betonTexture = this.Content.Load<Texture2D>("beton");
+            
             // TODO: use this.Content to load your game content here
         }
 
@@ -68,9 +74,10 @@ namespace MonogameProject
         /// </summary>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.DarkGray);
 
-            stacja.DrawStation();
+            stacja.DrawStation(betonTexture, scianyTexture);
+            peron.DrawPlatform(podlogaTexture, scianyTexture);
 
             base.Draw(gameTime);
         }

@@ -56,7 +56,7 @@ namespace MonogameProject
                 float aspectRatio = graphicsDevice.Viewport.Width / (float)graphicsDevice.Viewport.Height;
 
                 return Matrix.CreatePerspectiveFieldOfView(
-                    fieldOfView, aspectRatio, nearClipPlane, farClipPlane);
+                    fieldOfView, aspectRatio, nearClipPlane, farClipPlane) * Matrix.CreateRotationZ((float)Math.PI/2);
             }
         }
 
@@ -86,14 +86,14 @@ namespace MonogameProject
             }
             if (Keyboard.GetState().IsKeyDown(Keys.Up))
             {
-                moveVector += new Vector3(0, 0, -1);
+                moveVector += new Vector3(0, 0, 1);
                 /*position.Y += 1.0f;
                 position.X -= (float)Math.Sin((double)angleZ);
                 position.Z += (float)Math.Sin((double)angleX);*/
             }
             if (Keyboard.GetState().IsKeyDown(Keys.Down))
             {
-                moveVector += new Vector3(0, 0, 1);
+                moveVector += new Vector3(0, 0, -1);
                 /*position.Y -= 1.0f;
                 position.X += (float)Math.Sin((double)angleZ);
                 position.Z -= (float)Math.Sin((double)angleX);*/
@@ -122,11 +122,11 @@ namespace MonogameProject
             }
             if (Keyboard.GetState().IsKeyDown(Keys.A))
             {
-                leftrightRot += 0.02f;
+                leftrightRot -= 0.02f;
             }
             if (Keyboard.GetState().IsKeyDown(Keys.D))
             {
-                leftrightRot -= 0.02f;
+                leftrightRot += 0.02f;
             }
 
             AddToCameraPosition(moveVector, gameTime);
@@ -141,6 +141,7 @@ namespace MonogameProject
             cameraPosition += moveSpeed * rotatedVector;
             UpdateViewMatrix();
         }
+
         private void UpdateViewMatrix()
         {
             Matrix cameraRotation = Matrix.CreateRotationX(updownRot) * Matrix.CreateRotationY(leftrightRot);

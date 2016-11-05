@@ -48,9 +48,10 @@ namespace MonogameProject
 
         public void DrawStation()
         {
+            effect.World = Matrix.CreateRotationZ(-(float)Math.PI / 2);
             effect.View = camera.ViewMatrix;
             effect.Projection = camera.ProjectionMatrix;
-
+            //effect.World = Matrix.Identity * Matrix.CreateRotationZ((float)Math.PI / 2);
             effect.TextureEnabled = false;
 
             foreach (var pass in effect.CurrentTechnique.Passes)

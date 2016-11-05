@@ -20,7 +20,7 @@ namespace MonogameProject
 
         //------------------------------------------------------------------------
         Vector3 cameraPosition = new Vector3(2.0f, -4.0f, 2.0f);
-        float leftrightRot = 0.0f;//MathHelper.PiOver2;
+        float leftrightRot = - MathHelper.PiOver2;
         float updownRot = -MathHelper.Pi / 10.0f;
         const float rotationSpeed = 0.3f;
         const float moveSpeed = 1.0f;

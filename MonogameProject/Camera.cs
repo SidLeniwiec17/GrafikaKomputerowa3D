@@ -19,8 +19,8 @@ namespace MonogameProject
         float angleZ, angleX;*/
 
         //------------------------------------------------------------------------
-        Vector3 cameraPosition = new Vector3(0, 0, 0);
-        float leftrightRot = MathHelper.PiOver2;
+        Vector3 cameraPosition = new Vector3(2.0f, -4.0f, 2.0f);
+        float leftrightRot = 0.0f;//MathHelper.PiOver2;
         float updownRot = -MathHelper.Pi / 10.0f;
         const float rotationSpeed = 0.3f;
         const float moveSpeed = 1.0f;
@@ -86,14 +86,14 @@ namespace MonogameProject
             }
             if (Keyboard.GetState().IsKeyDown(Keys.Up))
             {
-                moveVector += new Vector3(0, 0, -1);
+                moveVector += new Vector3(0, 1, 0);
                 /*position.Y += 1.0f;
                 position.X -= (float)Math.Sin((double)angleZ);
                 position.Z += (float)Math.Sin((double)angleX);*/
             }
             if (Keyboard.GetState().IsKeyDown(Keys.Down))
             {
-                moveVector += new Vector3(0, 0, 1);
+                moveVector += new Vector3(0, -1, 0);
                 /*position.Y -= 1.0f;
                 position.X += (float)Math.Sin((double)angleZ);
                 position.Z -= (float)Math.Sin((double)angleX);*/
@@ -101,13 +101,13 @@ namespace MonogameProject
             ////----------------------PRZOD TYL
             if (Keyboard.GetState().IsKeyDown(Keys.OemPlus))
             {
-                moveVector += new Vector3(0, 1, 0);
+                moveVector += new Vector3(0, 0, 1);
                 //position.Z += 0.5f;
             }
             if (Keyboard.GetState().IsKeyDown(Keys.OemMinus))
             {
 
-                moveVector += new Vector3(0, -1, 0);   
+                moveVector += new Vector3(0, 0, -1);   
                 //position.Z -= 0.5f;
             }
 
@@ -136,20 +136,22 @@ namespace MonogameProject
         //------------------------------------------------------------------------
         private void AddToCameraPosition(Vector3 vectorToAdd, GameTime gameTime)
         {
-            Matrix cameraRotation = Matrix.CreateRotationX(updownRot) * Matrix.CreateRotationY(leftrightRot);
+            Matrix cameraRotation = Matrix.CreateRotationX(updownRot) * Matrix.CreateRotationZ(leftrightRot);
             Vector3 rotatedVector = Vector3.Transform(vectorToAdd, cameraRotation);
             cameraPosition += moveSpeed * rotatedVector;
             UpdateViewMatrix();
         }
         private void UpdateViewMatrix()
         {
-            Matrix cameraRotation = Matrix.CreateRotationX(updownRot) * Matrix.CreateRotationY(leftrightRot);
+            Matrix cameraRotation = Matrix.CreateRotationX(updownRot) * Matrix.CreateRotationZ(leftrightRot);
 
-            Vector3 cameraOriginalTarget = new Vector3(0, 0, -1);
+            //Vector3 cameraOriginalTarget = new Vector3(0, 0, -1);
+            Vector3 cameraOriginalTarget = new Vector3(0, 1, 0);
             Vector3 cameraRotatedTarget = Vector3.Transform(cameraOriginalTarget, cameraRotation);
             Vector3 cameraFinalTarget = cameraPosition + cameraRotatedTarget;
             
-            Vector3 cameraOriginalUpVector = new Vector3(0, 1, 0);
+            //Vector3 cameraOriginalUpVector = new Vector3(0, 1, 0);
+            Vector3 cameraOriginalUpVector = new Vector3(0, 0, 1);
             Vector3 cameraRotatedUpVector = Vector3.Transform(cameraOriginalUpVector, cameraRotation);
 
             ViewMatrix = Matrix.CreateLookAt(cameraPosition, cameraFinalTarget, cameraRotatedUpVector);

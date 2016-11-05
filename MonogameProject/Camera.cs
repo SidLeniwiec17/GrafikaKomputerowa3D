@@ -13,11 +13,8 @@ namespace MonogameProject
     {
        
         GraphicsDevice graphicsDevice;
-
-      
-
         //------------------------------------------------------------------------
-        Vector3 cameraPosition = new Vector3(2.0f, -4.0f, 2.0f);
+        public Vector3 cameraPosition = new Vector3(2.0f, -4.0f, 2.0f);
         float leftrightRot = 0.0f;
         float updownRot = -MathHelper.Pi / 10.0f;
         float clockwiseRot = 0.0f;

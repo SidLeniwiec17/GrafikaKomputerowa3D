@@ -14,7 +14,7 @@ namespace MonogameProject
         Platform peron;
         BasicEffect effect;
         Texture2D podlogaTexture, scianyTexture, betonTexture;
-
+        Bench lawka;
         Camera camera;
 
         public Game1()
@@ -31,9 +31,13 @@ namespace MonogameProject
         {
             effect = new BasicEffect(graphics.GraphicsDevice);
 
+            lawka = new Bench();
+            lawka.Initialize(Content);
+
             camera = new Camera(graphics.GraphicsDevice);
 
             stacja = new MainSolid(effect, camera, graphics, 40, 100);
+
             peron = new Platform(effect, camera, graphics, 40, 100);
 
             base.Initialize();
@@ -48,7 +52,6 @@ namespace MonogameProject
             scianyTexture = this.Content.Load<Texture2D>("scianaTekstura");
             podlogaTexture = this.Content.Load<Texture2D>("podłogaTekstura");
             betonTexture = this.Content.Load<Texture2D>("beton");
-            
             // TODO: use this.Content to load your game content here
         }
 
@@ -78,6 +81,10 @@ namespace MonogameProject
 
             stacja.DrawStation(betonTexture, scianyTexture);
             peron.DrawPlatform(podlogaTexture, scianyTexture);
+
+            float aspectRatio = graphics.GraphicsDevice.Viewport.Width / (float)graphics.GraphicsDevice.Viewport.Height;
+
+            //lawka.Draw(camera);
 
             base.Draw(gameTime);
         }

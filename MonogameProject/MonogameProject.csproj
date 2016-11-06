@@ -56,6 +56,7 @@
     <Compile Include="Bench.cs" />
     <Compile Include="Camera.cs" />
     <Compile Include="Game1.cs" />
+    <Compile Include="Garbage.cs" />
     <Compile Include="LightSource.cs" />
     <Compile Include="MainSolid.cs" />
     <Compile Include="Platform.cs" />

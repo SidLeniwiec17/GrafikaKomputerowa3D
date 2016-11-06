@@ -5,23 +5,22 @@ using Microsoft.Xna.Framework.Content;
 
 namespace MonogameProject
 {
-    public class Bench
+    public class Garbage
     {
-        Model lawka;
+        Model smietnik;
         int posX = 0;
         int posY = 0;
 
         public void Initialize(ContentManager contentManager, int x, int y)
         {
-            //lawka = contentManager.Load<Model>("bench_res");
-            lawka = contentManager.Load<Model>("benches");
+            smietnik = contentManager.Load<Model>("Garbage_Container_");
             posX = x;
             posY = y;
         }
 
         public void Draw(Camera camera, float aspectRatio)
         {
-            foreach (var mesh in lawka.Meshes)
+            foreach (var mesh in smietnik.Meshes)
             {
                 foreach (BasicEffect effect in mesh.Effects)
                 {
@@ -45,15 +44,15 @@ namespace MonogameProject
         }
         Matrix GetWorldMatrix()
         {
-            float scale = 0.05f;
+            float scale = 1.0f;
             // this matrix moves the model "out" from the origin
             Matrix translationMatrix = Matrix.CreateTranslation(posX, posY, -5);
 
             // this matrix rotates everything around the origin
-            Matrix rotationMatrix = Matrix.CreateRotationZ((float)Math.PI/2);
+            //Matrix rotationMatrix = Matrix.CreateRotationZ((float)Math.PI );
 
             // We combine the two to have the model move in a circle:
-            Matrix combined = Matrix.CreateScale(scale) * rotationMatrix * translationMatrix;
+            Matrix combined = Matrix.CreateScale(scale) * translationMatrix ;
 
             return combined;
         }

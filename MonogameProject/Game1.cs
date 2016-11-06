@@ -15,10 +15,13 @@ namespace MonogameProject
         Platform peron;
         BasicEffect effect;
         Texture2D podlogaTexture, scianyTexture, betonTexture;
+
         List<Bench> lawki;
+        List<Garbage> smietniki;
+
         Camera camera;
         LightSource light;
-        public List<LightSource> Lights { get; set; }
+        //public List<LightSource> Lights { get; set; }
 
         public Game1()
         {
@@ -39,19 +42,27 @@ namespace MonogameProject
                 lawki.Add(lawka);
             }
 
+            smietniki = new List<Garbage>();
+            for (int i = 0; i < 3; i++)
+            {
+                Garbage kosz = new Garbage();
+                kosz.Initialize(Content, -15 + (i % 2 * 10), 10 + (i * 10));
+                smietniki.Add(kosz);
+            }
+
             camera = new Camera(graphics.GraphicsDevice);
 
             stacja = new MainSolid(effect, camera, graphics, 40, 100);
 
             peron = new Platform(effect, camera, graphics, 40, 100);
 
-            Lights = new List<LightSource>();
-            CreateLights();
+            //Lights = new List<LightSource>();
+           // CreateLights();
 
             base.Initialize();
         }
 
-        private void CreateLights()
+       /* private void CreateLights()
         {
             light= new PointLight()
             {
@@ -60,7 +71,7 @@ namespace MonogameProject
                 Falloff = 2
             };
             Lights.Add(light);
-        }
+        }*/
 
         protected override void LoadContent()
         {
@@ -94,6 +105,8 @@ namespace MonogameProject
 
             for (int i = 0; i < lawki.Count; i++ )
                 lawki[i].Draw(camera, aspectRatio);
+            for (int i = 0; i < smietniki.Count; i++)
+                smietniki[i].Draw(camera, aspectRatio);
 
             base.Draw(gameTime);
         }

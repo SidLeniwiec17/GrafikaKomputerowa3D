@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.Collections.Generic;
 
 namespace MonogameProject
 {
@@ -14,8 +15,10 @@ namespace MonogameProject
         Platform peron;
         BasicEffect effect;
         Texture2D podlogaTexture, scianyTexture, betonTexture;
-        Bench lawka;
+        //Bench lawka;
         Camera camera;
+        LightSource light;
+        public List<LightSource> Lights { get; set; }
 
         public Game1()
         {
@@ -24,15 +27,12 @@ namespace MonogameProject
             Content.RootDirectory = "Content";
         }
 
-        /// <summary>
-        /// Allows the game to perform any initialization it needs to before starting to run.
-        /// </summary>
         protected override void Initialize()
         {
             effect = new BasicEffect(graphics.GraphicsDevice);
 
-            lawka = new Bench();
-            lawka.Initialize(Content);
+            //lawka = new Bench();
+            //lawka.Initialize(Content);
 
             camera = new Camera(graphics.GraphicsDevice);
 
@@ -40,30 +40,35 @@ namespace MonogameProject
 
             peron = new Platform(effect, camera, graphics, 40, 100);
 
+            Lights = new List<LightSource>();
+            CreateLights();
+
             base.Initialize();
         }
-       
-        /// <summary>
-        /// </summary>
+
+        private void CreateLights()
+        {
+            light= new PointLight()
+            {
+                Possition = new Vector3(0, 0, 8),
+                Attenuation = 5000,
+                Falloff = 2
+            };
+            Lights.Add(light);
+        }
+
         protected override void LoadContent()
         {
-            // Create a new SpriteBatch, which can be used to draw textures.
-            //spriteBatch = new SpriteBatch(GraphicsDevice);
             scianyTexture = this.Content.Load<Texture2D>("scianaTekstura");
             podlogaTexture = this.Content.Load<Texture2D>("podłogaTekstura");
             betonTexture = this.Content.Load<Texture2D>("beton");
-            // TODO: use this.Content to load your game content here
         }
 
-        /// <summary>
-        /// </summary>
         protected override void UnloadContent()
         {
-            // TODO: Unload any non ContentManager content here
+            Content.Unload();
         }
 
-        /// <summary>
-        /// </summary>
         protected override void Update(GameTime gameTime)
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
@@ -73,11 +78,9 @@ namespace MonogameProject
             base.Update(gameTime);
         }
 
-        /// <summary>
-        /// </summary>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.DarkGray);
+            GraphicsDevice.Clear(Color.Black);
 
             stacja.DrawStation(betonTexture, scianyTexture);
             peron.DrawPlatform(podlogaTexture, scianyTexture);

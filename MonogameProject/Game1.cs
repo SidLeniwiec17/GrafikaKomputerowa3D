@@ -15,7 +15,7 @@ namespace MonogameProject
         Platform peron;
         BasicEffect effect;
         Texture2D podlogaTexture, scianyTexture, betonTexture;
-        //Bench lawka;
+        List<Bench> lawki;
         Camera camera;
         LightSource light;
         public List<LightSource> Lights { get; set; }
@@ -31,8 +31,13 @@ namespace MonogameProject
         {
             effect = new BasicEffect(graphics.GraphicsDevice);
 
-            //lawka = new Bench();
-            //lawka.Initialize(Content);
+            lawki = new List<Bench>();
+            for (int i = 0; i < 4; i++)
+            {
+                Bench lawka = new Bench();
+                lawka.Initialize(Content, -18, -40 + (i * 20));
+                lawki.Add(lawka);
+            }
 
             camera = new Camera(graphics.GraphicsDevice);
 
@@ -80,14 +85,15 @@ namespace MonogameProject
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.Black);
+            GraphicsDevice.Clear(Color.DarkGray);
 
             stacja.DrawStation(betonTexture, scianyTexture);
             peron.DrawPlatform(podlogaTexture, scianyTexture);
 
             float aspectRatio = graphics.GraphicsDevice.Viewport.Width / (float)graphics.GraphicsDevice.Viewport.Height;
 
-            //lawka.Draw(camera);
+            for (int i = 0; i < lawki.Count; i++ )
+                lawki[i].Draw(camera, aspectRatio);
 
             base.Draw(gameTime);
         }

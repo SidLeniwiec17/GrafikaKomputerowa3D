@@ -21,12 +21,15 @@ namespace MonogameProject
 
         Camera camera;
         LightSource light;
+
+        int sceneSizeX = 40;
+        int sceneSizeY = 100;
         //public List<LightSource> Lights { get; set; }
 
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
-            //graphics.IsFullScreen = true;
+            graphics.IsFullScreen = true;
             Content.RootDirectory = "Content";
         }
 
@@ -50,11 +53,11 @@ namespace MonogameProject
                 smietniki.Add(kosz);
             }
 
-            camera = new Camera(graphics.GraphicsDevice);
+            camera = new Camera(graphics.GraphicsDevice, sceneSizeX, sceneSizeY);
 
-            stacja = new MainSolid(effect, camera, graphics, 40, 100);
+            stacja = new MainSolid(effect, camera, graphics, sceneSizeX, sceneSizeY);
 
-            peron = new Platform(effect, camera, graphics, 40, 100);
+            peron = new Platform(effect, camera, graphics, sceneSizeX, sceneSizeY);
 
             //Lights = new List<LightSource>();
            // CreateLights();

@@ -16,11 +16,13 @@ namespace MonogameProject
         //------------------------------------------------------------------------
         public Vector3 cameraPosition = new Vector3(2.0f, -4.0f, 2.0f);
         float leftrightRot = 0.0f;
-        float updownRot = -MathHelper.Pi / 10.0f;
+        float updownRot = 0.0f;//-MathHelper.Pi / 10.0f;
         float clockwiseRot = 0.0f;
-        const float rotationSpeed = 0.3f;
-        const float moveSpeed = 1.0f;
+        const float rotationSpeed = 0.4f;
+        const float moveSpeed = 0.5f;
         public Matrix ViewMatrix;
+        int sceneSizeX, sceneSizeY;
+        bool blokada = true;
         //------------------------------------------------------------------------
 
         public Matrix ProjectionMatrix
@@ -37,9 +39,11 @@ namespace MonogameProject
             }
         }
 
-        public Camera(GraphicsDevice graphicsDevice)
+        public Camera(GraphicsDevice graphicsDevice, int _sceneSizeX, int _sceneSizeY)
         {
             this.graphicsDevice = graphicsDevice;
+            sceneSizeX = _sceneSizeX;
+            sceneSizeY = _sceneSizeY;
         }
 
         public void Update(GameTime gameTime)
@@ -107,6 +111,26 @@ namespace MonogameProject
            
             Vector3 rotatedVector = Vector3.Transform(vectorToAdd, cameraRotation);
             cameraPosition += moveSpeed * rotatedVector;
+
+            if (blokada)
+            {
+                if (cameraPosition.X < -sceneSizeX / 2 + 1)
+                    cameraPosition.X = -sceneSizeX / 2 + 1;
+                if (cameraPosition.X > sceneSizeX / 2 - 1)
+                    cameraPosition.X = sceneSizeX / 2 - 1;
+
+                if (cameraPosition.Y < -sceneSizeY / 2 + 1)
+                    cameraPosition.Y = -sceneSizeY / 2 + 1;
+                if (cameraPosition.Y > sceneSizeY / 2 - 1)
+                    cameraPosition.Y = sceneSizeY / 2 - 1;
+
+                if (cameraPosition.Z < -4 && cameraPosition.X < (sceneSizeX / 4))
+                    cameraPosition.Z = -4;
+                if (cameraPosition.Z < -7 && cameraPosition.X > (sceneSizeX / 4))
+                    cameraPosition.Z = -7;
+                if (cameraPosition.Z > 7)
+                    cameraPosition.Z = 7;
+            }
 
             Vector3 cameraOriginalTarget = new Vector3(0, 1, 0);
             Vector3 cameraRotatedTarget = Vector3.Transform(cameraOriginalTarget, cameraRotation);

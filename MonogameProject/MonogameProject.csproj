@@ -57,10 +57,8 @@
     <Compile Include="Camera.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Garbage.cs" />
-    <Compile Include="LightSource.cs" />
     <Compile Include="MainSolid.cs" />
     <Compile Include="Platform.cs" />
-    <Compile Include="PointLight.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

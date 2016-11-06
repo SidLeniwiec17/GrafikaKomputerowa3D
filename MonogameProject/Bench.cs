@@ -13,7 +13,6 @@ namespace MonogameProject
 
         public void Initialize(ContentManager contentManager, int x, int y)
         {
-            //lawka = contentManager.Load<Model>("bench_res");
             lawka = contentManager.Load<Model>("benches");
             posX = x;
             posY = y;
@@ -26,22 +25,37 @@ namespace MonogameProject
                 foreach (BasicEffect effect in mesh.Effects)
                 {
                     effect.EnableDefaultLighting();
-                    //effect.PreferPerPixelLighting = true;
+                    effect.PreferPerPixelLighting = true;
 
                     effect.World = GetWorldMatrix();
-
                     effect.View = camera.ViewMatrix;
 
                     float fieldOfView = Microsoft.Xna.Framework.MathHelper.PiOver4;
                     float nearClipPlane = 1;
                     float farClipPlane = 200;
 
-                    effect.Projection = Matrix.CreatePerspectiveFieldOfView(
-                fieldOfView, aspectRatio, nearClipPlane, farClipPlane);
+                    effect.Projection = Matrix.CreatePerspectiveFieldOfView(fieldOfView, aspectRatio, nearClipPlane, farClipPlane);
                 }
 
                 mesh.Draw();
             }
+
+            /*foreach (var mesh in lawka.Meshes)
+            {
+                foreach (ModelMeshPart part in mesh.MeshParts)
+                {
+                    part.Effect = effect;
+                    effect.Parameters["World"].SetValue(GetWorldMatrix());
+                    effect.Parameters["View"].SetValue(camera.ViewMatrix);
+                    float fieldOfView = Microsoft.Xna.Framework.MathHelper.PiOver4;
+                    float nearClipPlane = 1;
+                    float farClipPlane = 200;
+                    effect.Parameters["Projection"].SetValue(Matrix.CreatePerspectiveFieldOfView(fieldOfView, aspectRatio, nearClipPlane, farClipPlane));
+                    Matrix worldInverseTransposeMatrix = Matrix.Transpose(Matrix.Invert(mesh.ParentBone.Transform * GetWorldMatrix()));
+                    effect.Parameters["WorldInverseTranspose"].SetValue(worldInverseTransposeMatrix);
+                }
+                mesh.Draw();
+            }*/
         }
         Matrix GetWorldMatrix()
         {

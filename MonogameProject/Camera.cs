@@ -128,6 +128,7 @@ namespace MonogameProject
                     cameraPosition.Z = -4;
                 if (cameraPosition.Z < -7 && cameraPosition.X > (sceneSizeX / 4))
                     cameraPosition.Z = -7;
+
                 if (cameraPosition.Z > 7)
                     cameraPosition.Z = 7;
             }

@@ -25,7 +25,7 @@ namespace MonogameProject
                 foreach (BasicEffect effect in mesh.Effects)
                 {
                     effect.EnableDefaultLighting();
-                    //effect.PreferPerPixelLighting = true;
+                    effect.PreferPerPixelLighting = true;
 
                     effect.World = GetWorldMatrix();
 
@@ -41,6 +41,23 @@ namespace MonogameProject
 
                 mesh.Draw();
             }
+
+            /*foreach (var mesh in smietnik.Meshes)
+            {
+                foreach (ModelMeshPart part in mesh.MeshParts)
+                {
+                    part.Effect = effect;
+                    effect.Parameters["World"].SetValue(GetWorldMatrix());
+                    effect.Parameters["View"].SetValue(camera.ViewMatrix);
+                    float fieldOfView = Microsoft.Xna.Framework.MathHelper.PiOver4;
+                    float nearClipPlane = 1;
+                    float farClipPlane = 200;
+                    effect.Parameters["Projection"].SetValue(Matrix.CreatePerspectiveFieldOfView(fieldOfView, aspectRatio, nearClipPlane, farClipPlane));
+                    Matrix worldInverseTransposeMatrix = Matrix.Transpose(Matrix.Invert(mesh.ParentBone.Transform * GetWorldMatrix()));
+                    effect.Parameters["WorldInverseTranspose"].SetValue(worldInverseTransposeMatrix);
+                }
+                mesh.Draw();
+            }*/
         }
         Matrix GetWorldMatrix()
         {

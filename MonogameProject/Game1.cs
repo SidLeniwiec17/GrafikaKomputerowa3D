@@ -14,22 +14,22 @@ namespace MonogameProject
         MainSolid stacja;
         Platform peron;
         BasicEffect effect;
-        Texture2D podlogaTexture, scianyTexture, betonTexture;
+        Texture2D podlogaTexture, scianyTexture, betonTexture, tunelTexture;
 
         List<Bench> lawki;
         List<Garbage> smietniki;
 
         Camera camera;
-        LightSource light;
 
         int sceneSizeX = 40;
         int sceneSizeY = 100;
-        //public List<LightSource> Lights { get; set; }
+
+        //Effect diffuseEffect, textureEffect;
 
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
-            graphics.IsFullScreen = true;
+            //graphics.IsFullScreen = true;
             Content.RootDirectory = "Content";
         }
 
@@ -59,28 +59,19 @@ namespace MonogameProject
 
             peron = new Platform(effect, camera, graphics, sceneSizeX, sceneSizeY);
 
-            //Lights = new List<LightSource>();
-           // CreateLights();
 
             base.Initialize();
         }
 
-       /* private void CreateLights()
-        {
-            light= new PointLight()
-            {
-                Possition = new Vector3(0, 0, 8),
-                Attenuation = 5000,
-                Falloff = 2
-            };
-            Lights.Add(light);
-        }*/
 
         protected override void LoadContent()
         {
             scianyTexture = this.Content.Load<Texture2D>("scianaTekstura");
             podlogaTexture = this.Content.Load<Texture2D>("podłogaTekstura");
             betonTexture = this.Content.Load<Texture2D>("beton");
+            tunelTexture = this.Content.Load<Texture2D>("blackTxt");
+            //diffuseEffect = this.Content.Load<Effect>("Diffuse");
+            //textureEffect = this.Content.Load<Effect>("TextureShader");
         }
 
         protected override void UnloadContent()
@@ -99,9 +90,9 @@ namespace MonogameProject
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.DarkGray);
+            GraphicsDevice.Clear(Color.Black);
 
-            stacja.DrawStation(betonTexture, scianyTexture);
+            stacja.DrawStation(betonTexture, scianyTexture, tunelTexture);
             peron.DrawPlatform(podlogaTexture, scianyTexture);
 
             float aspectRatio = graphics.GraphicsDevice.Viewport.Width / (float)graphics.GraphicsDevice.Viewport.Height;

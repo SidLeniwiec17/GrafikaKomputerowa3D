@@ -73,7 +73,7 @@ namespace MonogameProject
                 sVerts[i * 3 + 2].Normal = normal;
             }
 
-            int repetitions = szerX;
+            int repetitions = szerX / 2;
             for (int i = 0; i < sVerts.Length; i = i + 6)
             {
                 sVerts[i].TextureCoordinate = new Vector2(0, 0);

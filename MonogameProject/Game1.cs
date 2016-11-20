@@ -18,6 +18,7 @@ namespace MonogameProject
 
         List<Bench> lawki;
         List<Garbage> smietniki;
+        Model laweczka, smietniczek;
 
         Camera camera;
 
@@ -29,13 +30,22 @@ namespace MonogameProject
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
-            graphics.IsFullScreen = true;
+            //graphics.IsFullScreen = true;
             Content.RootDirectory = "Content";
         }
 
         protected override void Initialize()
         {
             effect = new BasicEffect(graphics.GraphicsDevice);
+
+            effect.LightingEnabled = true; // turn on the lighting subsystem.
+            effect.DirectionalLight0.DiffuseColor = new Vector3(1.0f, 1.0f, 1.0f);
+            effect.DirectionalLight0.Direction = new Vector3(0, 0, -1);
+            effect.DirectionalLight0.SpecularColor = new Vector3(0, 0, 0);
+            effect.AmbientLightColor = new Vector3(0.6f, 0.6f, 0.6f);
+            effect.EmissiveColor = new Vector3(0, 0, 0);
+            effect.PreferPerPixelLighting = true;
+
 
             lawki = new List<Bench>();
             for (int i = 0; i < 4; i++)
@@ -70,6 +80,8 @@ namespace MonogameProject
             podlogaTexture = this.Content.Load<Texture2D>("podłogaTekstura");
             betonTexture = this.Content.Load<Texture2D>("beton");
             tunelTexture = this.Content.Load<Texture2D>("blackTxt");
+            laweczka = this.Content.Load<Model>("benches");
+            smietniczek = this.Content.Load<Model>("Garbage_Container_");
             //diffuseEffect = this.Content.Load<Effect>("Diffuse");
             //textureEffect = this.Content.Load<Effect>("TextureShader");
         }
@@ -98,9 +110,9 @@ namespace MonogameProject
             float aspectRatio = graphics.GraphicsDevice.Viewport.Width / (float)graphics.GraphicsDevice.Viewport.Height;
 
             for (int i = 0; i < lawki.Count; i++ )
-                lawki[i].Draw(camera, aspectRatio);
+                lawki[i].Draw(camera, aspectRatio, laweczka);
             for (int i = 0; i < smietniki.Count; i++)
-                smietniki[i].Draw(camera, aspectRatio);
+                smietniki[i].Draw(camera, aspectRatio, smietniczek);
 
             base.Draw(gameTime);
         }

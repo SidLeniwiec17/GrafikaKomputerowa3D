@@ -7,26 +7,26 @@ namespace MonogameProject
 {
     public class Bench
     {
-        Model lawka;
+        //Model lawka;
         int posX = 0;
         int posY = 0;
 
         public void Initialize(ContentManager contentManager, int x, int y)
         {
-            lawka = contentManager.Load<Model>("benches");
+            //lawka = contentManager.Load<Model>("benches");
+            
             posX = x;
             posY = y;
         }
 
-        public void Draw(Camera camera, float aspectRatio)
+        public void Draw(Camera camera, float aspectRatio, Model lawka)
         {
             foreach (var mesh in lawka.Meshes)
             {
                 foreach (BasicEffect effect in mesh.Effects)
                 {
                     effect.EnableDefaultLighting();
-                    effect.PreferPerPixelLighting = true;
-
+                   
                     effect.World = GetWorldMatrix();
                     effect.View = camera.ViewMatrix;
 

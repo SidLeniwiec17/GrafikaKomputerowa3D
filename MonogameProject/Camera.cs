@@ -19,7 +19,7 @@ namespace MonogameProject
         float updownRot = 0.0f;//-MathHelper.Pi / 10.0f;
         float clockwiseRot = 0.0f;
         const float rotationSpeed = 0.4f;
-        const float moveSpeed = 0.5f;
+        const float moveSpeed = 20.0f;
         public Matrix ViewMatrix;
         int sceneSizeX, sceneSizeY;
         bool blokada = true;
@@ -102,16 +102,15 @@ namespace MonogameProject
             {
                 clockwiseRot += 0.02f;
             }
-            UpdateViewMatrix(moveVector);
+            UpdateViewMatrix(moveVector, gameTime);
         }
-
-        private void UpdateViewMatrix(Vector3 vectorToAdd)
+        private void UpdateViewMatrix(Vector3 vectorToAdd, GameTime gameTime)
         {
             Matrix cameraRotation = Matrix.CreateRotationX(updownRot) * Matrix.CreateRotationY(clockwiseRot) * Matrix.CreateRotationZ(leftrightRot);
            
             Vector3 rotatedVector = Vector3.Transform(vectorToAdd, cameraRotation);
-            cameraPosition += moveSpeed * rotatedVector;
-
+            cameraPosition += (moveSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds )* rotatedVector;
+            
             if (blokada)
             {
                 if (cameraPosition.X < -sceneSizeX / 2 + 1)

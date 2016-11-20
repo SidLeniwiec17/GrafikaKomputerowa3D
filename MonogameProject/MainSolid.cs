@@ -28,68 +28,7 @@ namespace MonogameProject
             stationVerts = InitializeStation();
         }
 
-        /*public VertexPositionNormalTexture[] InitializeStation()
-        {
-            VertexPositionNormalTexture[] sVerts = new VertexPositionNormalTexture[36];
-            //podloga
-            sVerts[0].Position = new Vector3(-(szerX / 2), -(dluY / 2), -wysokosc);
-            sVerts[1].Position = new Vector3(-(szerX / 2), (dluY / 2), -wysokosc);
-            sVerts[2].Position = new Vector3((szerX / 2), -(dluY / 2), -wysokosc);
-
-            sVerts[3].Position = sVerts[1].Position;
-            sVerts[4].Position = new Vector3((szerX / 2), (dluY / 2), -wysokosc);
-            sVerts[5].Position = sVerts[2].Position;
-
-            //przod
-            sVerts[6].Position = sVerts[1].Position;
-            sVerts[7].Position = new Vector3(-(szerX / 2), (dluY / 2), wysokosc);
-            sVerts[8].Position = sVerts[4].Position;
-
-            sVerts[9].Position = sVerts[7].Position;
-            sVerts[10].Position = new Vector3((szerX / 2), (dluY / 2), wysokosc);
-            sVerts[11].Position = sVerts[8].Position;
-
-            //prawasciana
-            sVerts[12].Position = sVerts[4].Position;
-            sVerts[13].Position = sVerts[10].Position;
-            sVerts[14].Position = sVerts[2].Position;
-
-            sVerts[15].Position = sVerts[10].Position;
-            sVerts[16].Position = new Vector3((szerX / 2), -(dluY / 2), wysokosc);
-            sVerts[17].Position = sVerts[2].Position;
-            
-            //lewa sciana
-            sVerts[18].Position = sVerts[0].Position;
-            sVerts[19].Position = new Vector3(-(szerX / 2), -(dluY / 2), wysokosc);
-            sVerts[20].Position = sVerts[1].Position;
-
-            sVerts[21].Position = sVerts[19].Position;
-            sVerts[22].Position = sVerts[7].Position;
-            sVerts[23].Position = sVerts[1].Position;
-
-            //tyl
-            sVerts[24].Position = sVerts[2].Position;
-            sVerts[25].Position = sVerts[16].Position;
-            sVerts[26].Position = sVerts[0].Position;
-
-            sVerts[27].Position = new Vector3((szerX / 2), -(dluY / 2), wysokosc);
-            sVerts[28].Position = new Vector3(-(szerX / 2), -(dluY / 2), wysokosc);
-            sVerts[29].Position = new Vector3(-(szerX / 2), -(dluY / 2), -wysokosc);
-                    
-            //sufit
-            sVerts[30].Position = new Vector3(-(szerX / 2), (dluY / 2), wysokosc);
-            sVerts[31].Position = new Vector3(-(szerX / 2), -(dluY / 2), wysokosc);
-            sVerts[32].Position = new Vector3((szerX / 2), (dluY / 2), wysokosc);
-
-            sVerts[33].Position = new Vector3(-(szerX / 2), -(dluY / 2), wysokosc);
-            sVerts[34].Position = new Vector3((szerX / 2), -(dluY / 2), wysokosc);
-            sVerts[35].Position = new Vector3((szerX / 2), (dluY / 2), wysokosc);
-
-            sVerts = AddNormalsTextures(sVerts);
-
-            return sVerts;
-        }*/
-
+       
 
         public VertexPositionNormalTexture[] InitializeStation()
         {

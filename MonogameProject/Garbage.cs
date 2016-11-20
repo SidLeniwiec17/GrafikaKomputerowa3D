@@ -7,25 +7,24 @@ namespace MonogameProject
 {
     public class Garbage
     {
-        Model smietnik;
+        //Model smietnik;
         int posX = 0;
         int posY = 0;
 
         public void Initialize(ContentManager contentManager, int x, int y)
         {
-            smietnik = contentManager.Load<Model>("Garbage_Container_");
+            //smietnik = contentManager.Load<Model>("Garbage_Container_");
             posX = x;
             posY = y;
         }
 
-        public void Draw(Camera camera, float aspectRatio)
+        public void Draw(Camera camera, float aspectRatio, Model smietnik)
         {
             foreach (var mesh in smietnik.Meshes)
             {
                 foreach (BasicEffect effect in mesh.Effects)
                 {
                     effect.EnableDefaultLighting();
-                    effect.PreferPerPixelLighting = true;
 
                     effect.World = GetWorldMatrix();
 
